@@ -10,6 +10,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,24 +25,29 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-      String[] nameList = {"Ram Mohan", "Raja Das", "Manu"};
+      String[] nameList = {"Ram Mohan", "Raja Das", "Manu", "Rohan", "Parth", "Prakhar"};
       String[] messageList = {"Hey! how are you? I was wondering if you'd be able to make it to the wedding?",
               "Sir, I have completed the task that you assigned to me last week.",
-              "What are you tryfing to say with all the efforts you put in your work?"
+              "What are you tryfing to say with all the efforts you put in your work?",
+              "Sir, I have completed the task that you assigned to me last week.",
+              "What are you tryfing to say with all the efforts you put in your work?",
+              "Sir, I have completed the task that you assigned to me last week.",
       };
-      String[] timeList = {"12:30 PM", "1:00 AM", "Yesterday"};
+      String[] timeList = {"12:30 PM", "1:00 AM", "Yesterday", "Yesterday", "Yesterday", "Yesterday"};
 
       ListView listView;
       MyAdapter adapter;
 
       private TextToSpeech myTTS;
+      private SpeechRecognizer mySpeechRecognizer;
 
       ImageButton btnCompose ;
-
+      ImageButton btnVoice;
 
 
       @Override
@@ -48,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_main);
 
             initilizeTextToSpeech();
+            initializeSpeechRecognizer();
 
             Toolbar toolbar = findViewById(R.id.toolbar);
             toolbar.setTitle("Inbox");
@@ -66,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
 
             btnCompose = findViewById(R.id.composeBtn);
+            btnVoice = findViewById(R.id.btnVoice);
+
 
             btnCompose.setOnClickListener(new View.OnClickListener() {
                   @Override
@@ -75,8 +86,89 @@ public class MainActivity extends AppCompatActivity {
                   }
             });
 
+            btnVoice.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                        startListening();
+                  }
+            });
+
+
       }
 
+      private void startListening() {
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
+            mySpeechRecognizer.startListening(intent);
+      }
+
+      private void initializeSpeechRecognizer() {
+            if(SpeechRecognizer.isRecognitionAvailable(this) ){
+                  mySpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+                  mySpeechRecognizer.setRecognitionListener(new RecognitionListener() {
+                        @Override
+                        public void onReadyForSpeech(Bundle params) {
+
+                        }
+
+                        @Override
+                        public void onBeginningOfSpeech() {
+
+                        }
+
+                        @Override
+                        public void onRmsChanged(float rmsdB) {
+
+                        }
+
+                        @Override
+                        public void onBufferReceived(byte[] buffer) {
+
+                        }
+
+                        @Override
+                        public void onEndOfSpeech() {
+
+                        }
+
+                        @Override
+                        public void onError(int error) {
+
+                        }
+
+                        @Override
+                        public void onResults(Bundle bundle) {
+                              List<String> results = bundle.getStringArrayList(
+                                      SpeechRecognizer.RESULTS_RECOGNITION
+                              );
+                              assert results != null;
+                              processResult(results.get(0));
+                        }
+
+                        @Override
+                        public void onPartialResults(Bundle partialResults) {
+
+                        }
+
+                        @Override
+                        public void onEvent(int eventType, Bundle params) {
+
+                        }
+                  });
+            }
+      }
+
+      private void processResult(String command) {
+            command = command.toLowerCase();
+
+            if(command.contains("compose")){
+                  Intent intent = new Intent(MainActivity.this, ComposeActivity.class);
+                  startActivity(intent);
+            }
+
+      }
 
 
       private void initilizeTextToSpeech() {

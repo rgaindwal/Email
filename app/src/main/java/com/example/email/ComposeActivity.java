@@ -51,7 +51,6 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
             btnDone = findViewById(R.id.btnDone);
             btnVoice = findViewById(R.id.btnVoice);
 
-            askNumber = 0;
 
             btnVoice.setOnClickListener(this);
 
@@ -64,12 +63,12 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
             intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
             mySpeechRecognizer.startListening(intent);
+            askNumber++;
       }
 
       private void requestTo() {
             speak("Whom do you want to send the message");
             int secs = 2;
-            askNumber = 0;
             Utils.delay(secs, new Utils.DelayCallback() {
                   @Override
                   public void afterDelay() {
@@ -81,7 +80,15 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
       }
 
       private void requestCc() {
-
+            speak("Whom do you want to cc the message");
+            int secs = 2;
+            Utils.delay(secs, new Utils.DelayCallback() {
+                  @Override
+                  public void afterDelay() {
+                        // Do something after delay
+                        startListening();
+                  }
+            });
       }
 
       private void requestSubject() {
@@ -178,8 +185,15 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
 
             Toast.makeText(this, command, Toast.LENGTH_SHORT).show();
 
-            if(askNumber == 0)
+            if(askNumber %4== 0) {
                   toEdt.setText(command);
+                  askNumber++;
+            }
+
+            if(askNumber%4 == 1) {
+                  ccEdt.setText(command);
+                  askNumber++;
+            }
 
             speak(command);
       }
@@ -193,6 +207,7 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
                                     requestTo();
                                     break;
                               case 1:
+                                    requestCc();
                                     break;
                               case 2:
                                     break;
@@ -201,11 +216,7 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
                               case 4:
                                     break;
                         }
-
-
-
                         break;
-
             }
       }
 

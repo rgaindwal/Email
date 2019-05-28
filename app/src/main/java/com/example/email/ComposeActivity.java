@@ -51,6 +51,7 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
             btnDone = findViewById(R.id.btnDone);
             btnVoice = findViewById(R.id.btnVoice);
 
+            askNumber = 0;
 
             btnVoice.setOnClickListener(this);
 
@@ -63,7 +64,6 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
             intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
             mySpeechRecognizer.startListening(intent);
-            askNumber++;
       }
 
       private void requestTo() {
@@ -92,13 +92,42 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
       }
 
       private void requestSubject() {
+            speak("What is the subject?");
+            int secs = 2;
+            Utils.delay(secs, new Utils.DelayCallback() {
+                  @Override
+                  public void afterDelay() {
+                        // Do something after delay
+                        startListening();
+                  }
+            });
 
       }
 
       private void requestMessage() {
+            speak("What is the message?");
+            int secs = 2;
+            Utils.delay(secs, new Utils.DelayCallback() {
+                  @Override
+                  public void afterDelay() {
+                        // Do something after delay
+                        startListening();
+                  }
+            });
+
       }
 
       private void requestSend() {
+            speak("Do you want to send the mail");
+            int secs = 2;
+            Utils.delay(secs, new Utils.DelayCallback() {
+                  @Override
+                  public void afterDelay() {
+                        // Do something after delay
+                        startListening();
+                  }
+            });
+
       }
 
 
@@ -185,24 +214,58 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
 
             Toast.makeText(this, command, Toast.LENGTH_SHORT).show();
 
-            if(askNumber %4== 0) {
-                  toEdt.setText(command);
-                  askNumber++;
+            if(command.contains("to") || command.contains("send")){
+                  askNumber = 0;
             }
 
-            if(askNumber%4 == 1) {
-                  ccEdt.setText(command);
+
+            if(askNumber %5== 0) {
+                  speak(command);
+                  String s = command.replace("\\s+","");
+                  toEdt.setText(s);
+                  askNumber++;
+            } else if(askNumber%5 == 1) {
+                  speak(command);
+                  if(!command.contains("none"))
+                        ccEdt.setText(command);
+                  askNumber++;
+            } else if(askNumber%5 == 2) {
+                  speak(command);
+                        if(!command.contains("none"))
+                  subjectEdt.setText(command);
+                  askNumber++;
+            } else if(askNumber%5 == 3) {
+                  speak(command);
+                  messageEdt.setText(command);
+                  askNumber++;
+            } else if(askNumber%5 == 4) {
+                  if(command.contains("yes")){
+                        speak("Sending Message");
+                        sendEmail();
+                  } else if(command.contains("no")){
+                        speak("What do you want to edit?");
+                        int secs = 2;
+                        Utils.delay(secs, new Utils.DelayCallback() {
+                              @Override
+                              public void afterDelay() {
+                                    // Do something after delay
+                                    startListening();
+                              }
+                        });
+                  }
                   askNumber++;
             }
+      }
 
-            speak(command);
+      private void sendEmail() {
+            //Implement the Gmail API call to email
       }
 
       @Override
       public void onClick(View v) {
             switch (v.getId()){
                   case R.id.btnVoice:
-                        switch (askNumber){
+                        switch (askNumber%5){
                               case 0:
                                     requestTo();
                                     break;
@@ -210,11 +273,18 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
                                     requestCc();
                                     break;
                               case 2:
+                                    requestSubject();
                                     break;
                               case 3:
+                                    requestMessage();
                                     break;
                               case 4:
+                                    requestSend();
                                     break;
+                              default:
+                                    askNumber = 0;
+                                    break;
+
                         }
                         break;
             }

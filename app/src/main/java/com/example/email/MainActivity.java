@@ -1,14 +1,7 @@
 package com.example.email;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -19,11 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.List;
 import java.util.Locale;
@@ -46,8 +43,12 @@ public class MainActivity extends AppCompatActivity {
       private TextToSpeech myTTS;
       private SpeechRecognizer mySpeechRecognizer;
 
-      ImageButton btnCompose ;
+      private int currentIndex;
+
+      ImageButton btnCompose;
       ImageButton btnVoice;
+      ImageButton btnforwardFlow;
+      ImageButton btnLeftFocus, btnRightFocus;
 
 
       @Override
@@ -55,12 +56,16 @@ public class MainActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
 
-            initilizeTextToSpeech();
-            initializeSpeechRecognizer();
+            currentIndex = 0;
 
             Toolbar toolbar = findViewById(R.id.toolbar);
             toolbar.setTitle("Inbox");
             setSupportActionBar(toolbar);
+
+
+            initilizeTextToSpeech();
+            initializeSpeechRecognizer();
+
 
             listView = findViewById(R.id.listEmail);
             adapter = new MyAdapter(this, nameList, messageList, timeList);
@@ -76,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
             btnCompose = findViewById(R.id.composeBtn);
             btnVoice = findViewById(R.id.btnVoice);
+            btnforwardFlow = findViewById(R.id.forwardFlowBtn);
+            btnLeftFocus = findViewById(R.id.leftFocusBtn);
+            btnRightFocus = findViewById(R.id.rightFocusBtn);
 
 
             btnCompose.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +100,33 @@ public class MainActivity extends AppCompatActivity {
                         startListening();
                   }
             });
+            btnforwardFlow.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                        Intent intent = new Intent(MainActivity.this, SentActivity.class);
+                        startActivity(intent);
+                  }
+            });
 
+            btnRightFocus.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                        if (currentIndex < nameList.length) {
+                              speak(currentIndex);
+                              currentIndex++;
+                        }
+                  }
+            });
+
+            btnLeftFocus.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                        if (currentIndex > 0) {
+                              currentIndex--;
+                              speak(currentIndex);
+                        }
+                  }
+            });
 
       }
 
@@ -105,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
       }
 
       private void initializeSpeechRecognizer() {
-            if(SpeechRecognizer.isRecognitionAvailable(this) ){
+            if (SpeechRecognizer.isRecognitionAvailable(this)) {
                   mySpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
                   mySpeechRecognizer.setRecognitionListener(new RecognitionListener() {
                         @Override
@@ -163,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
       private void processResult(String command) {
             command = command.toLowerCase();
 
-            if(command.contains("compose")){
+            if (command.contains("compose") || (command.contains("new") && command.contains("email"))) {
                   Intent intent = new Intent(MainActivity.this, ComposeActivity.class);
                   startActivity(intent);
             }
@@ -175,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
             myTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
                   @Override
                   public void onInit(int status) {
-                        if(myTTS.getEngines().size() == 0){
+                        if (myTTS.getEngines().size() == 0) {
                               Toast.makeText(MainActivity.this, "No TTS engine", Toast.LENGTH_SHORT).show();
                         } else {
                               myTTS.setLanguage(Locale.US);
@@ -195,13 +229,13 @@ public class MainActivity extends AppCompatActivity {
             myTTS.speak(s, TextToSpeech.QUEUE_FLUSH, null, null);
       }
 
-      class MyAdapter extends ArrayAdapter<String>{
+      class MyAdapter extends ArrayAdapter<String> {
             Context context;
             String[] rname;
             String[] rmess;
             String[] rtime;
 
-            MyAdapter(Context c, String[] name, String[] message, String[] time){
+            MyAdapter(Context c, String[] name, String[] message, String[] time) {
                   super(c, R.layout.layout_email_item, R.id.tvName, name);
 
                   this.context = c;
@@ -223,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
 
                   tvmessage.setText(rmess[position]);
                   tvtime.setText(rtime[position]);
-                 tvname.setText(rname[ position]);
+                  tvname.setText(rname[position]);
 
                   return row;
             }

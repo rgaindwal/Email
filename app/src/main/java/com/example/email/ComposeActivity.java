@@ -30,6 +30,7 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
 
       private int askNumber;
 
+
       @Override
       protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -131,14 +132,11 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
       }
 
 
-
-
-
       private void initilizeTextToSpeech() {
             myTTS = new TextToSpeech(ComposeActivity.this, new TextToSpeech.OnInitListener() {
                   @Override
                   public void onInit(int status) {
-                        if(myTTS.getEngines().size() == 0){
+                        if (myTTS.getEngines().size() == 0) {
                               Toast.makeText(ComposeActivity.this, "No TTS engine", Toast.LENGTH_SHORT).show();
                         } else {
                               myTTS.setLanguage(Locale.US);
@@ -154,7 +152,7 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
 
 
       private void initializeSpeechRecognizer() {
-            if(SpeechRecognizer.isRecognitionAvailable(this) ){
+            if (SpeechRecognizer.isRecognitionAvailable(this)) {
                   mySpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
                   mySpeechRecognizer.setRecognitionListener(new RecognitionListener() {
                         @Override
@@ -190,7 +188,7 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
                         @Override
                         public void onResults(Bundle bundle) {
                               List<String> results = bundle.getStringArrayList(
-                                SpeechRecognizer.RESULTS_RECOGNITION
+                                      SpeechRecognizer.RESULTS_RECOGNITION
                               );
                               assert results != null;
                               processResult(results.get(0));
@@ -214,48 +212,94 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
 
             Toast.makeText(this, command, Toast.LENGTH_SHORT).show();
 
-            if(command.contains("to") || command.contains("send")){
+            if (command.contains("to") || command.contains("send")) {
                   askNumber = 0;
-            }
-
-
-            if(askNumber %5== 0) {
-                  speak(command);
-                  String s = command.replace("\\s+","");
-                  toEdt.setText(s);
-                  askNumber++;
-            } else if(askNumber%5 == 1) {
-                  speak(command);
-                  if(!command.contains("none"))
-                        ccEdt.setText(command);
-                  askNumber++;
-            } else if(askNumber%5 == 2) {
-                  speak(command);
-                        if(!command.contains("none"))
-                  subjectEdt.setText(command);
-                  askNumber++;
-            } else if(askNumber%5 == 3) {
-                  speak(command);
-                  messageEdt.setText(command);
-                  askNumber++;
-            } else if(askNumber%5 == 4) {
-                  if(command.contains("yes")){
-                        speak("Sending Message");
-                        sendEmail();
-                  } else if(command.contains("no")){
-                        speak("What do you want to edit?");
-                        int secs = 2;
-                        Utils.delay(secs, new Utils.DelayCallback() {
-                              @Override
-                              public void afterDelay() {
-                                    // Do something after delay
-                                    startListening();
-                              }
-                        });
+                  int secs = 1;
+                  Utils.delay(secs, new Utils.DelayCallback() {
+                        @Override
+                        public void afterDelay() {
+                              // Do something after delay
+                              startListening();
+                        }
+                  });
+                  return;
+            } else if (command.contains("cc")) {
+                  askNumber = 1;
+                  int secs = 1;
+                  Utils.delay(secs, new Utils.DelayCallback() {
+                        @Override
+                        public void afterDelay() {
+                              // Do something after delay
+                              startListening();
+                        }
+                  });
+                  return;
+            } else if (command.contains("subject")) {
+                  askNumber = 2;
+                  int secs = 1;
+                  Utils.delay(secs, new Utils.DelayCallback() {
+                        @Override
+                        public void afterDelay() {
+                              // Do something after delay
+                              startListening();
+                        }
+                  });
+                  return;
+            } else if (command.contains("message")) {
+                  askNumber = 3;
+                  int secs = 1;
+                  Utils.delay(secs, new Utils.DelayCallback() {
+                        @Override
+                        public void afterDelay() {
+                              // Do something after delay
+                              startListening();
+                        }
+                  });
+                  return;
+            } else if (command.contains("confirm") && command.contains("send")) {
+                  speak("Sending Message");
+                  sendEmail();
+            } else {
+                  if (askNumber % 5 == 0) {
+                        speak(command);
+                        String s = command.replace("\\s+", "");
+                        toEdt.setText(s);
+                        askNumber++;
+                  } else if (askNumber % 5 == 1) {
+                        speak(command);
+                        if (!command.contains("none"))
+                              ccEdt.setText(command);
+                        askNumber++;
+                  } else if (askNumber % 5 == 2) {
+                        speak(command);
+                        if (!command.contains("none"))
+                              subjectEdt.setText(command);
+                        askNumber++;
+                  } else if (askNumber % 5 == 3) {
+                        speak(command);
+                        messageEdt.setText(command);
+                        askNumber++;
+                  } else if (askNumber % 5 == 4) {
+                        if (command.contains("yes")) {
+                              speak("Sending Message");
+                              sendEmail();
+                        } else if (command.contains("no")) {
+                              speak("What do you want to edit?");
+                              int secs = 2;
+                              Utils.delay(secs, new Utils.DelayCallback() {
+                                    @Override
+                                    public void afterDelay() {
+                                          // Do something after delay
+                                          startListening();
+                                    }
+                              });
+                        }
+                        askNumber++;
                   }
-                  askNumber++;
             }
+
       }
+
 
       private void sendEmail() {
             //Implement the Gmail API call to email
@@ -263,9 +307,9 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
 
       @Override
       public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                   case R.id.btnVoice:
-                        switch (askNumber%5){
+                        switch (askNumber % 5) {
                               case 0:
                                     requestTo();
                                     break;
@@ -294,11 +338,11 @@ public class ComposeActivity extends AppCompatActivity implements View.OnClickLi
 
             // Delay mechanism
 
-            public interface DelayCallback{
+            public interface DelayCallback {
                   void afterDelay();
             }
 
-            public static void delay(int secs, final DelayCallback delayCallback){
+            public static void delay(int secs, final DelayCallback delayCallback) {
                   Handler handler = new Handler();
                   handler.postDelayed(new Runnable() {
                         @Override

@@ -6,6 +6,7 @@
     <color name="colorAccent">#4fa3d2</color>
     <color name="colorAccentLight">#85d4ff</color>
     <color name="colorAccentDark">#0074a1</color>
+    <color name="colorButton">#524364</color>
 
     <!--reds-->
     <color name="md_red_50">#FFEBEE</color>

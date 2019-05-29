@@ -165,18 +165,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         break;
                   case R.id.btnLogin:
-                        if(Objects.requireNonNull(txtEmail.getEditText()).getText().toString().toLowerCase().equals("hello @ gmail.com") &&
-                                Objects.requireNonNull(txtPass.getEditText()).getText().toString().toLowerCase().equals("1234")){
-                              Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                              startActivity(intent);
-                              finish();
-                        }
+                        Objects.requireNonNull(txtEmail.getEditText()).setText("hello@gmail.com");
+                        Objects.requireNonNull(txtPass.getEditText()).setText("1234");
+
+                        int secs = 2;
+                        ComposeActivity.Utils.delay(secs, new ComposeActivity.Utils.DelayCallback() {
+                              @Override
+                              public void afterDelay() {
+                                    // Do something after delay
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                              }
+                        });
 
                         break;
                   case R.id.imgVoice:
                         if (currentCtr % 4 == 0) {
                               speak("Speak Email");
-                              int secs = 1;
+                               secs = 1;
                               ComposeActivity.Utils.delay(secs, new ComposeActivity.Utils.DelayCallback() {
                                     @Override
                                     public void afterDelay() {
@@ -187,7 +194,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                               currentCtr++;
                         } else if (currentCtr % 4 == 1) {
                               speak("Speak Password");
-                              int secs = 1;
+                               secs = 1;
                               ComposeActivity.Utils.delay(secs, new ComposeActivity.Utils.DelayCallback() {
                                     @Override
                                     public void afterDelay() {
@@ -198,7 +205,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                               currentCtr++;
                         } else if (currentCtr % 4 == 2) {
                               speak("Shall we login?");
-                              int secs = 1;
+                               secs = 1;
                               ComposeActivity.Utils.delay(secs, new ComposeActivity.Utils.DelayCallback() {
                                     @Override
                                     public void afterDelay() {

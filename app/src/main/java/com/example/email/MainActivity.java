@@ -217,6 +217,20 @@ public class MainActivity extends AppCompatActivity {
                   Intent intent = new Intent(MainActivity.this, SentActivity.class);
                   startActivity(intent);
             }
+            if(command.contains("log out") || command.contains("sign out")){
+                  speak("Signing out");
+                  int secs = 2;
+                  ComposeActivity.Utils.delay(secs, new ComposeActivity.Utils.DelayCallback() {
+                        @Override
+                        public void afterDelay() {
+                              // Do something after delay
+                              Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                              startActivity(intent);
+                              finish();
+                        }
+                  });
+
+            }
 
       }
 

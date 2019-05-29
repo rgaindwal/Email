@@ -34,6 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24px" />
 
         <ImageButton
@@ -41,12 +43,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
             android:src="@drawable/ic_baseline_email_24px" />
 
         <ImageButton
             android:id="@+id/forwardFlowBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
             android:layout_weight="1"
             android:src="@drawable/ic_baseline_arrow_right_alt_24px" />
 
@@ -69,13 +75,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
             android:src="@drawable/ic_baseline_arrow_back_ios_24px" />
 
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
 
             />
 
@@ -84,6 +93,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
             android:src="@drawable/ic_baseline_arrow_left_alt_24px_copy" />
 
     </LinearLayout>
@@ -115,6 +126,8 @@
         <ImageButton
             android:id="@+id/btnRepeatAction"
             android:layout_width="0dp"
+            android:backgroundTint="@color/colorAccentDark"
+            android:tint="@color/md_white_1000"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_baseline_play_circle_outline_24px" />
@@ -124,6 +137,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccentDark"
+            android:tint="@color/md_white_1000"
             android:src="@drawable/ic_baseline_keyboard_voice_24px"
 
             />
@@ -133,6 +148,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccentDark"
+            android:tint="@color/md_white_1000"
             android:src="@drawable/ic_baseline_done_24px" />
 
 

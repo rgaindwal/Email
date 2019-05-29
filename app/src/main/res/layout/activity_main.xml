@@ -9,9 +9,9 @@
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/listEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/listEmail">
+        app:layout_constraintStart_toStartOf="parent">
 
     </include>
 
@@ -24,6 +24,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
+        android:padding="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@id/MainButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,13 +36,18 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24px" />
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24px"
+            />
 
         <ImageButton
             android:id="@+id/composeBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
             android:src="@drawable/ic_baseline_email_24px" />
 
         <ImageButton
@@ -49,6 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
             android:src="@drawable/ic_baseline_arrow_right_alt_24px" />
 
     </LinearLayout>
@@ -60,9 +68,11 @@
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
         android:weightSum="3"
+        android:padding="0dp"
+        android:layout_margin="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/MainButton"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <ImageButton
@@ -70,13 +80,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
             android:src="@drawable/ic_baseline_arrow_back_ios_24px" />
 
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
 
             />
 
@@ -85,6 +98,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccent"
+            android:tint="@color/md_white_1000"
             android:src="@drawable/ic_baseline_arrow_left_alt_24px_copy" />
 
     </LinearLayout>
@@ -96,10 +111,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/MainButton"
         app:layout_constraintEnd_toStartOf="@+id/rightLinearButtons"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/leftLinearButtons"
-        app:layout_constraintBottom_toTopOf="@id/MainButton"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <LinearLayout
@@ -107,10 +122,12 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:orientation="horizontal"
+        android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:padding="0dp"
+        android:layout_margin="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:weightSum="3"
         app:layout_constraintTop_toBottomOf="@id/listEmail">
 
         <ImageButton
@@ -118,6 +135,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/colorAccentDark"
+            android:tint="@color/md_white_1000"
             android:src="@drawable/ic_baseline_play_circle_outline_24px" />
 
         <ImageButton
@@ -126,7 +145,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/ic_baseline_keyboard_voice_24px"
-
+            android:backgroundTint="@color/colorAccentDark"
+            android:tint="@color/md_white_1000"
             />
 
         <ImageButton
@@ -134,7 +154,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_baseline_done_24px" />
+            android:src="@drawable/ic_baseline_done_24px"
+            android:backgroundTint="@color/colorAccentDark"
+            android:tint="@color/md_white_1000"/>
 
 
     </LinearLayout>

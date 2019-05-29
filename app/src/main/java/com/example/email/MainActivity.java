@@ -2,6 +2,7 @@ package com.example.email;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
@@ -133,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
             btnRepeatLast.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View v) {
-                        if(!lastCommand.equals(""))
-                        speak(lastCommand);
+                        if (!lastCommand.equals(""))
+                              speak(lastCommand);
                   }
             });
 
@@ -209,6 +210,11 @@ public class MainActivity extends AppCompatActivity {
 
             if (command.contains("compose") || (command.contains("new") && command.contains("email"))) {
                   Intent intent = new Intent(MainActivity.this, ComposeActivity.class);
+                  startActivity(intent);
+            }
+            if (command.contains("outbox") || command.contains("sent") ||
+                    (command.contains("past") && command.contains("email"))) {
+                  Intent intent = new Intent(MainActivity.this, SentActivity.class);
                   startActivity(intent);
             }
 

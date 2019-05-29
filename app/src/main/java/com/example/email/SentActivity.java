@@ -44,8 +44,10 @@ public class SentActivity extends AppCompatActivity implements View.OnClickListe
 
       private TextToSpeech myTTS;
 
-      private ImageButton btnBackFlow;
+      ImageButton btnBackFlow;
+      ImageButton btnRepeatLast;
 
+      private String lastCommand;
 
 
       @Override
@@ -60,7 +62,7 @@ public class SentActivity extends AppCompatActivity implements View.OnClickListe
             initilizeTextToSpeech();
 
             btnBackFlow = findViewById(R.id.backFlowBtn);
-
+            btnRepeatLast = findViewById(R.id.btnRepeatAction);
 
             listView = findViewById(R.id.listEmail);
             adapter = new MyAdapter(this, nameList, messageList, timeList);
@@ -75,7 +77,7 @@ public class SentActivity extends AppCompatActivity implements View.OnClickListe
 
 
             btnBackFlow.setOnClickListener(this);
-
+            btnRepeatLast.setOnClickListener(this);
       }
 
       private void initilizeTextToSpeech() {
@@ -94,24 +96,16 @@ public class SentActivity extends AppCompatActivity implements View.OnClickListe
 
       private void speak(String s) {
             myTTS.speak(s, TextToSpeech.QUEUE_FLUSH, null, null);
+            lastCommand = s;
       }
 
       private void speak(int position) {
             String s;
             s = "Message from" + nameList[position] + "at," + timeList[position] + " is." + messageList[position].substring(0, 60);
             myTTS.speak(s, TextToSpeech.QUEUE_FLUSH, null, null);
+            lastCommand = s;
       }
 
-      @Override
-      public void onClick(View v) {
-            switch (v.getId()){
-                  case R.id.backFlowBtn:
-                        Intent intent = new Intent(SentActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                        break;
-            }
-      }
 
       class MyAdapter extends ArrayAdapter<String>{
             Context context;
@@ -144,6 +138,21 @@ public class SentActivity extends AppCompatActivity implements View.OnClickListe
                   tvname.setText(rname[ position]);
 
                   return row;
+            }
+      }
+
+
+      @Override
+      public void onClick(View v) {
+            switch (v.getId()){
+                  case R.id.backFlowBtn:
+                        Intent intent = new Intent(SentActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                  case R.id.btnRepeatAction:
+                        speak(lastCommand);
+                        break;
             }
       }
 }

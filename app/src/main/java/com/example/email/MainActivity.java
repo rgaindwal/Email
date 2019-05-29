@@ -44,12 +44,13 @@ public class MainActivity extends AppCompatActivity {
       private SpeechRecognizer mySpeechRecognizer;
 
       private int currentIndex;
+      private String lastCommand;
 
       ImageButton btnCompose;
       ImageButton btnVoice;
       ImageButton btnforwardFlow;
       ImageButton btnLeftFocus, btnRightFocus;
-
+      ImageButton btnRepeatLast;
 
       @Override
       protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_main);
 
             currentIndex = 0;
+            lastCommand = "";
 
             Toolbar toolbar = findViewById(R.id.toolbar);
             toolbar.setTitle("Inbox");
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             btnforwardFlow = findViewById(R.id.forwardFlowBtn);
             btnLeftFocus = findViewById(R.id.leftFocusBtn);
             btnRightFocus = findViewById(R.id.rightFocusBtn);
-
+            btnRepeatLast = findViewById(R.id.btnRepeatAction);
 
             btnCompose.setOnClickListener(new View.OnClickListener() {
                   @Override
@@ -125,6 +127,14 @@ public class MainActivity extends AppCompatActivity {
                               currentIndex--;
                               speak(currentIndex);
                         }
+                  }
+            });
+
+            btnRepeatLast.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View v) {
+                        if(!lastCommand.equals(""))
+                        speak(lastCommand);
                   }
             });
 
@@ -221,12 +231,14 @@ public class MainActivity extends AppCompatActivity {
 
       private void speak(String s) {
             myTTS.speak(s, TextToSpeech.QUEUE_FLUSH, null, null);
+            lastCommand = s;
       }
 
       private void speak(int position) {
             String s;
             s = "Message from" + nameList[position] + "at," + timeList[position] + " is." + messageList[position].substring(0, 60);
             myTTS.speak(s, TextToSpeech.QUEUE_FLUSH, null, null);
+            lastCommand = s;
       }
 
       class MyAdapter extends ArrayAdapter<String> {

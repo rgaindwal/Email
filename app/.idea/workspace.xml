@@ -9,15 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="76f4d25e-467e-481e-8f6d-cfd221c4ada2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/email/SentActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/res/layout/activity_sent.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/email/ComposeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/email/ComposeActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/email/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/email/MainActivity.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,8 +32,8 @@
         <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="33" column="42" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="42" />
+            <state relative-caret-position="421">
+              <caret line="116" column="44" selection-start-line="116" selection-start-column="29" selection-end-line="116" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -48,12 +41,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/example/email/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1720">
-              <caret line="123" column="47" selection-start-line="123" selection-start-column="47" selection-end-line="123" selection-end-column="47" />
+            <state relative-caret-position="471">
+              <caret line="135" column="49" selection-start-line="135" selection-start-column="49" selection-end-line="135" selection-end-column="49" />
               <folding>
-                <element signature="e#4002#4324#0" expanded="true" />
-                <element signature="e#4323#4324#0" expanded="true" />
-                <element signature="e#7926#7927#0" expanded="true" />
+                <element signature="e#4888#5070#0" expanded="true" />
+                <element signature="e#5069#5070#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -75,9 +67,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="1380" />
-    <option name="height" value="1045" />
+    <option name="x" value="-8" />
+    <option name="width" value="1381" />
+    <option name="height" value="1046" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -95,6 +87,9 @@
     <property name="android.sdk.path" value="D:/SDK/Android" />
     <property name="device.picker.selection" value="ENU7N15A17012674" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -192,10 +187,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1753" height="954" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" weight="0.2209782" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.14908662" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
@@ -203,7 +197,6 @@
       <window_info id="Resources Explorer" order="6" />
       <window_info id="Capture Tool" order="7" />
       <window_info id="Favorites" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Find" weight="0.3292978" />
       <window_info anchor="bottom" id="Run" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" />
       <window_info anchor="bottom" id="TODO" order="2" />
@@ -213,7 +206,8 @@
       <window_info anchor="bottom" id="Event Log" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Flutter Performance" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Build" order="9" weight="0.32808718" />
+      <window_info anchor="bottom" id="Build" order="9" weight="0.3244552" />
+      <window_info anchor="bottom" id="Find" order="10" weight="0.3292978" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -265,9 +259,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/email/Sent.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/example/email/Sent.java" />
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-28/android/content/Intent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
@@ -297,19 +289,18 @@
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="33" column="42" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="42" />
+        <state relative-caret-position="421">
+          <caret line="116" column="44" selection-start-line="116" selection-start-column="29" selection-end-line="116" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/example/email/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1720">
-          <caret line="123" column="47" selection-start-line="123" selection-start-column="47" selection-end-line="123" selection-end-column="47" />
+        <state relative-caret-position="471">
+          <caret line="135" column="49" selection-start-line="135" selection-start-column="49" selection-end-line="135" selection-end-column="49" />
           <folding>
-            <element signature="e#4002#4324#0" expanded="true" />
-            <element signature="e#4323#4324#0" expanded="true" />
-            <element signature="e#7926#7927#0" expanded="true" />
+            <element signature="e#4888#5070#0" expanded="true" />
+            <element signature="e#5069#5070#0" expanded="true" />
           </folding>
         </state>
       </provider>
